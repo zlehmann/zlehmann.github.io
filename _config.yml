@@ -1,11 +1,11 @@
 # Site settings
-author: zlehmann@gmail.com
-title: 
+author: Zachary Lehmann
+title: ZakLearnsToCode
 header-img: img/home-bg.png
 email: zlehmann@gmail.com
-copyright_name: zlehmann@gmail.com
+copyright_name: Zachary Lehmann
 description: > # this means to ignore newlines until "baseurl:"
-  
+  A 35 year old environmental scientist's journey into web development
 baseurl: "" # the subpath of your site, e.g. /blog
 twitter_username: 
 github_username:  zlehmann
