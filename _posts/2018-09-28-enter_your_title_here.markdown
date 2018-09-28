@@ -1,7 +1,7 @@
 ---
 layout: post
-title:      "Enter your title here"
-date:       2018-09-28 17:59:21 +0000
+title:      "Looping Method Cheatsheet"
+date:       2018-09-28 13:59:22 -0400
 permalink:  enter_your_title_here
 ---
 
