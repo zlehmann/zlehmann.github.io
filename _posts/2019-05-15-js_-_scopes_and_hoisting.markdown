@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "JS - Scopes and Hoisting"
-date:       2019-05-15 20:44:39 +0000
+date:       2019-05-15 16:44:40 -0400
 permalink:  js_-_scopes_and_hoisting
 ---
 
@@ -15,19 +15,19 @@ And so I took it upon myself (was assigned) to go on a little journey into the d
 # Declaration vs. Assignment
 Alright, let's start at the beginning. This part is pretty easy, but it affects each process that comes after it and becomes surprisingly important! Declaration is how we "set up" variables and functions. It's our way of telling JS that we want to have a variable with a specific name:
 ```
-var var_variable;
-let let_variable;
-const const_variable;
+var varVariable;
+let letVariable;
+const constVariable;
 ```
 Assignment is where we, not surprisingly, assign a value to a declared location:
 ```
-var_variable = "This is a var";
-let_variable = "This is a let";
-const_variable = "This is a const";
+varVariable = "This is a var";
+letVariable = "This is a let";
+constVariable = "This is a const";
 ```
 JS allows us to combine these lines into a streamlined fashion like this:
 ```
-var var_variable = "This is a var";
+var varVariable = "This is a var";
 ```
 But this isn't exactly how the compiler sees things as we'll get into later. 
 
@@ -53,7 +53,7 @@ function myFunc() {
 
 myFunc();
 ```
-What do you get back? Well it's interesting. JS assigns values to two separate var instances in memory. One in a global scope and one in the block scope for myFunc. myFunc has access to both the global version and the block scoped version of var, so which does it choose to return? Well it finds the value inside the block first when it is invoked and returns 20, but if we ask for just the value of test, we get 10!
+What do you get back? Well it's interesting. JS assigns values to two separate test instances in memory. One in a global scope and one in the block scope for myFunc. myFunc has access to both the global version and the block scoped version of test, so which does it choose to return? Well it finds the value inside the block first when it is invoked and returns 20, but if we ask for just the value of test, we get 10!
 
 # Hoisting
 So what the heck is hoisting? Hoisting is JS's way of dealing with declarations. In essence JS evaluates every line of code twice, once in a compilation phase and once in an execution phase. In the execution phase, if a variable name is encountered that does not have a declaration before it, JS will "hoist" the declaration it did find in the compliation phase. This allows code like:
