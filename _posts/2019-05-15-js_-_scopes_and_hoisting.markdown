@@ -44,10 +44,10 @@ If you try to read the value of either variable outside of that function, you'll
 
 So what happens if you try to re-declare a variable from different scopes?
 ```
-const test = 10;
+let test = 10;
 
 function myFunc() {
-  const test = 20;
+  let test = 20;
 	return test;
 }
 
