@@ -1,7 +1,7 @@
 ---
 layout: post
-title:      "Enter your title here"
-date:       2019-07-30 16:27:27 +0000
+title:      "Big O - A shortcut to the good stuff"
+date:       2019-07-30 12:27:28 -0400
 permalink:  enter_your_title_here
 ---
 
