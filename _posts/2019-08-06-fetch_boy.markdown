@@ -32,7 +32,7 @@ The first line we have the fetch method call itself:
 ```fetch('some/url/here')```
 This is all there is to the actual fetching itself. It couldn't be easier! You are telling your program to fetch data from a specific url. Everything else you see in the code block at the beginning of this post is handling the response you get back. That is where all our confusion and complications come from.
 	
-So since fetch is a method call it probably returns a value right? It does and you might be thinking its a promise object, since those are the things we seem to need to work with all the time when dealing with this asyncronise stuff. But in fact the return of the fetch method is a stream object. It's only when we use the .json() method on the stream object that we get our legendary promise object. 
+So since fetch is a method call it probably returns a value right? It does and its called a promise object. Promise objects are kind of like boxes. They contain other data types inside of them. You can sort of think of the .then() methods as opening those boxes to get what you actually want inside. In fact we're getting more than one promise here. The first contains our response. The second is inside the response, and contains the json we really want.
 	
 That brings us to the second line of our block:
 ```.then(res => res.json())```
