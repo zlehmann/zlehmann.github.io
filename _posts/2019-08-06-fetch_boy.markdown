@@ -1,0 +1,54 @@
+---
+layout: post
+title:      "Fetch Boy!"
+date:       2019-08-06 14:47:34 +0000
+permalink:  fetch_boy
+---
+
+
+I recently participated in a technical interview with a paired programming session that went...well, less than well. It was a relatively straight forward assignment, but I needed a ton of hand holding to get through it. Two things were really tripping me up. Working with javascript objects, nested within gods know what else, and fetching data from an external API. I plan on writing a lot more about javascript objects and nesting in another post, but today I want to focus on fetching.
+
+An interesting thing a lot of people may not know is that the fetch method is not included in the base node.js library; meaning you can't just say `fetch(api/url)` in node. It's an external library (the node-fetch library) you need to install and include in your codebase. It's actually allowing you to use the browser's fetch ability in your node environment.
+
+So how do we use fetch? Almost anyone who was worked with web development has probably seen a code snippet similar to the following:
+`const fetch = require('node-fetch');
+
+fetch('https://jsonplaceholder.typicode.com/todos/1')
+    .then(res => res.json()) // expecting a json response
+    .then(json => {
+        console.log(json.id);
+        console.log(json.title);
+    })
+    .catch(err => {
+        console.log(err);
+    });`
+		
+	If you're just skimming through you're probably thinking yeah that's a fetch request. But why does it look like this? What is it doing and how can I understand the request promise relationship better? Let's start line by line and see if we can dig into it a little deeper. 
+	
+	The first line we have the fetch method call itself:
+	`fetch('some/url/here')`
+	This is all there is to the actual fetching itself. It couldn't be easier! You are telling your program to fetch data from a specific url. Everything else you see in the code block at the beginning of this post is handling the response you get back. That is where all our confusion and complications come from.
+	
+	So since fetch is a method call it probably returns a value right? It does and you might be thinking its a promise object, since those are the things we seem to need to work with all the time when dealing with this asyncronise stuff. But in fact the return of the fetch method is a stream object. It's only when we use the .json() method on the stream object that we get our legendary promise object. 
+	
+	That brings us to the second line of our block:
+	`.then(res => res.json())`
+	So what is this doing? The '.then' method is telling the computer to wait until it gets a response from the server, THEN do this next block of code with it. We are then using an arrow function to say, ok take that response you just got, and make it a json object. Pretty good so far, this seems nice and logical.
+	
+	Next we tell it to `.then(json => {some other code here}`. This is saying after you've converted my response into a nice json format I can actually work with, THEN do some other block of code to it. Also pretty straight forward, although working with the arrow functions like this was super confusing to me at first. How does it know what json is?! I'm still practicing with those. 
+	
+	The next part is where I always have trouble. Okay I can console.log out the data if I want, but how do I do something with it? It's inside these functions and not necessarily accessible to my code outside of the fetch itself. I always get stuck in a rut trying to save my json as some kind of variable I can then use later, but that isn't how we need to approach the problem. That json we want is enclosed within the fetch method. We won't be able to access it outside of there. But what if we save the entire response of the fetch call to a value? By changing our first block of code to look something more like the following, we can then manipulate that value however we want since we will have scope access to it.
+	
+	`const fetch = require('node-fetch');
+
+const response = fetch('https://jsonplaceholder.typicode.com/todos/1')
+    .then(res => res.json()) // expecting a json response
+    .then(json => {
+        console.log(json.id);
+        console.log(json.title);
+    })
+    .catch(err => {
+        console.log(err);
+    });`
+		
+	Now we can say things like `let product_list = response.body[products]` or something similar to begin extracting the data we actually want out of the response we got!
